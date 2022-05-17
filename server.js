@@ -29,19 +29,21 @@ app.use(cookieParser())
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
-}
 
-// Session cookies between Express.js and Vue.js with Axios
-// https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7
-// EnableCors
-app.use(cors({
-    origin: [
-        `http://${process.env.VUE_APP_URL}`,
-        `https://${process.env.VUE_APP_URL}`
-    ],
-    credentials: true,
-    exposedHeaders: ['set-cookie']
-}))
+    // Session cookies between Express.js and Vue.js with Axios
+    // https://medium.com/developer-rants/session-cookies-between-express-js-and-vue-js-with-axios-98a10274fae7
+    // EnableCors
+    app.use(cors({
+        origin: [
+            `http://${process.env.VUE_APP_URL}`,
+            `https://${process.env.VUE_APP_URL}`
+        ],
+        credentials: true,
+        exposedHeaders: ['set-cookie']
+    }))
+} else {
+    app.use(cors())
+}
 
 // Sanitize data
 app.use(mongoSanitize())
