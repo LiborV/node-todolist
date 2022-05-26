@@ -81,11 +81,9 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     await user.save({ validateBeforeSave: false })
 
     // Create reset URL
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`
+    const resetUrl = `${req.protocol}://${process.env.VUE_APP_URL}/resetpassword`
 
-    const message = `You are receiving this email because you (or someone else) has
-        requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`
-
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Use the password reset token at this url: ${resetUrl}. Reset token: ${resetToken}`
 
     try {
         await sendEmail({

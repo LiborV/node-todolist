@@ -8,7 +8,7 @@ const ItemSchema = new Schema({
         required: [true, 'Please add a title'],
         unique: true,
         trim: true,
-        maxlength: [50, 'Title con not be more then 50 characters']
+        maxlength: [50, 'Title can not be more then 50 characters']
     },
     slug: String,
     priority: {
